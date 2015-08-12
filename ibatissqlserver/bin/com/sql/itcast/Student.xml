@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+    <sqlMap>
+    <typeAlias alias="Student" type="com.sql.itcast.Student"/>
+    <select id="queryAllStudent" resultClass="Student">
+    select * from student
+    </select>
+    <insert id="insertStudent" parameterClass="Student">
+        insert into student(sid,sname,major,birth,score) 
+        values(#sid#,#sname#,#major#,#birth#,#score#)
+    </insert>
+    <delete id="deleteStudent" parameterClass="int">
+        delete from student where sid=#sid#
+    </delete>
+    <update id="updateStudent" parameterClass="Student">
+        update student set sid=#sid#,sname=#sname#,major=#major#,birth=#birth#,score=#score#
+      where sid=#sid#
+    </update>
+    <!-- ibatis的模糊查询-->
+    <select id="selectStudentByName" parameterClass="String" resultClass="Student">
+    select sid,sname,major,birth,score
+    from student where sname like '%$sname$%'
+   
+    </select>
+   
+    </sqlMap>
